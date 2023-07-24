@@ -8,7 +8,7 @@ module.exports = {
 			filename: './index.html',
 		}),
 		new CleanWebpackPlugin(),
-	],
+		],
 	devtool: 'inline-source-map',
 	mode: 'development',
 	entry: {
@@ -42,25 +42,27 @@ module.exports = {
 	},
 	performance: {
 		maxAssetSize: 1000000,
-	},
-	module: {
-		rules: [
-			{
-				test: /\.css$/i,
-				use: ['style-loader', 'css-loader'],
-			},
-			{
-				test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-				use: [
-					{
-						loader: ['file-loader', 'image-webpack-loader'],
-						options: {
-							bypassOnDebug: true,
+	},  
+  module: {
+	rules: [
+		{
+			test: /\.css$/i,
+			use: ["css-loader", "style-loader"],
+		},
+		{
+			test: /\.(?:ico|gif|png|jpe?g|svg)$/i,
+			type: 'asset/resource',
+			use: [
+				"file-loader",
+				{
+					loader: "image-webpack-loader",
+					options: {
+							bypassingOnDebug: true,
 							disable: true,
-						},
 					},
-				],
-			},
-		],
-	},
+				},
+			],
+		},
+	],
+},
 };
